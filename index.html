@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤런!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #output {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: left;
+            margin-left: auto; /* 자동 여백 추가 */
+            margin-right: auto; /* 자동 여백 추가 */
+            display: inline-block;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            cursor: pointer;
+            display: block; /* 블록 레벨 요소로 변경 */
+            margin: 20px auto; /* 중앙 정렬 및 위아래 여백 추가 */
+        }
+    </style>
+</head>
+<body>
+
+<div id="output">아래의 버튼을 누르면 시작됩니다.</div>
+<button onclick="generateRandomStrings()">랜덤런!</button>
+
+<script>
+    const episode = [
+        '에피소드 1 "오븐 탈출"',
+        '에피소드 2 "원시림"',
+        '에피소드 3 "용의 협곡"',
+        '에피소드 4 "마법사들의 도시"',
+        '에피소드 5 "디저트 파라디이스"'
+    ];
+
+    const cookies = [
+        '용감한 쿠키군',
+        '명랑한 쿠키양',
+        '딸기맛 쿠키',
+        '쿠키앤크림 쿠키',
+        '구름맛 쿠키',
+        '버터크림 초코쿠키',
+        '산타맛 쿠키',
+        '커피맛 쿠키',
+        '보더맛 쿠키',
+        '공주맛 쿠키',
+        '용사맛 쿠키',
+        '근육맛 쿠키',
+        '좀비맛 쿠키',
+        '천사맛 쿠키',
+        '닌자맛 쿠키',
+        '해적맛 쿠키',
+        '피겨여왕맛 쿠키',
+        '히어로맛 쿠키',
+        '치어리더맛 쿠키',
+        '특전사맛 쿠키',
+        '의적맛 쿠키',
+        '구미호맛 쿠키',
+        '악마맛 쿠키',
+        '마법사맛 쿠키',
+        '요정맛 쿠키',
+        '락스타맛 쿠키',
+        '체리맛 쿠키',
+        '음유시인 쿠키',
+        '눈설탕맛 쿠키',
+        '핑크초코쿠키',
+        '예언자맛 쿠키',
+        '피스타치오맛 쿠키',
+        '연금술사맛 쿠키',
+        '뱀파이어맛 쿠키',
+        '풋사과맛 쿠키',
+        '치즈케이크맛 쿠키',
+        '소다맛 쿠키',
+        '탐험가맛 쿠키',
+        '블랙베리맛 쿠키',
+        '키위맛 쿠키',
+        '웨어울프맛 쿠키',
+        '용감한 쿠키군',
+        '민트초코쿠키',
+        '코코아맛 쿠키',
+        '홍고추맛 쿠키',
+        '슈크림맛 쿠키',
+        '버블껌맛 쿠키',
+        '벚꽃맛 쿠키',
+        '레몬맛 쿠키',
+        '오렌지맛 쿠키',
+        '라임맛 쿠키',
+        '박하사탕맛 쿠키',
+        '복숨아맛 쿠키',
+        '대추맛 쿠키',
+        '양파맛 쿠키',
+        '시나몬맛 쿠키',
+        '마카롱맛 쿠키',
+        '단팥맛 쿠키',
+        '화이트초코 쿠키',
+        '허브맛 쿠키',
+        '다이노사워 쿠키',
+        '바다요정쿠키',
+        '솜사탕맛 쿠키',
+        '롤케이크맛 쿠키',
+        '바나나맛 쿠키',
+        '팬케이크맛 쿠키',
+        '달토끼맛 쿠키'
+    ]
+    const pet = [
+    '방울방울 콩콩이',
+    '초코방울',
+    '구름사탕',
+    '조랭이젤리',
+    '치즈방울',
+    '산타양말',
+    '쌍둥이 덤벨',
+    '생크림 모카커피',
+    '포근실타래',
+    '안깐마늘',
+    '테크노볼',
+    '산타모자',
+    '뭉치유니콘',
+    '플라워콥터',
+    '천사의 별',
+    '브레인껌',
+    '용의 꼬리',
+    '럭키다이스 형제',
+    '빛나는 럭키 호박',
+    '공주의 장신구',
+    '해적의 폭탄',
+    '꼬마유령',
+    '눈꽃송이',
+    '젤리코 큐브',
+    '반짝이볼',
+    '건빵 보급병',
+    '불꽃박쥐',
+    '황금방울',
+    '바람이',
+    '여우구슬',
+    '마법사전',
+    '꽃봉오리',
+    '스포트라이트',
+    '로켓폭죽',
+    '통나무케이크',
+    '스노우 글로브',
+    '복주머니',
+    '핑크캔디',
+    '보라보라 향초',
+    '반딧불이',
+    '젤리저울',
+    '코인저울',
+    '참나무 주스통',
+    '토끼사과',
+    '치즈뭉치 고양이',
+    '조각레몬',
+    '배낭이',
+    '집사 유령',
+    '키위새',
+    '털뭉치 멍뭉이',
+    '미스터 파솔라시',
+    '미스 도레미',
+    '마시멜로 햄찌',
+    '파프리카 샌드백',
+    '도토리 부엉이',
+    '미니 잭슨 2호',
+    '홍차 찻잔',
+    '레몬 전지',
+    '어린 쥐',
+    '백금방울',
+    '미스터 삑',
+    '종이배 선원',
+    '판다 만두',
+    '식지 않는 찻잔',
+    '양파 물고기',
+    '시나몬롤 토끼',
+    '캐스터네츠',
+    '파도방울',
+    '찹쌀 하프물범',
+    '회중시계 심판',
+    '허브티팟',
+    '팝핑 용알',
+    '솜사탕 비둘기',
+    '라이트 형제',
+    '사바나나 사자',
+    '팬케이크 원반',
+    '달절구',
+    '초코 왕방울'
+    ]
+
+    let prevIndexEpisode = -1;
+    let prevIndexCookies1 = -1;
+    let prevIndexCookies2 = -1;
+    let prevIndexPet = -1;
+
+    // 랜덤으로 문자열을 선택하는 함수
+    function generateRandomStrings() {
+        // 에피소드
+        let randomIndexEpisode;
+        do {
+            randomIndexEpisode = Math.floor(Math.random() * ((episode.length-1) - 0)+0);
+        } while (randomIndexEpisode === prevIndexEpisode);
+        let episodeOutput = episode[randomIndexEpisode];
+
+        // 쿠키1
+        let randomIndexCookies1;
+        do {
+            randomIndexCookies1 = Math.floor(Math.random() * ((cookies.length-1) - 0)+0);
+        } while (randomIndexCookies1 === prevIndexCookies1);
+        let cookieOutput1 = cookies[randomIndexCookies1];
+
+        // 쿠키2
+        let randomIndexCookies2;
+        do {
+            randomIndexCookies2 = Math.floor(Math.random() * ((cookies.length-1) - 0)+0);
+        } while (randomIndexCookies2 === prevIndexCookies2);
+        if (randomIndexCookies1 == randomIndexCookies2) { 
+           if (randomIndexCookies2 != cookies.length-1) {
+            randomIndexCookies2++;
+           } else {
+            randomIndexCookies2--;
+           }
+        } 
+        let cookieOutput2 = cookies[randomIndexCookies2];
+
+        let randomIndexPet;
+        do {
+            randomIndexPet = Math.floor(Math.random() * pet.length);
+        } while (randomIndexPet === prevIndexPet);
+        let petOutput = pet[randomIndexPet];
+
+        // 출력
+        document.getElementById('output').innerText = '';
+        document.getElementById('output').innerText = `${episodeOutput}`;
+        document.getElementById('output').innerText += `\n선달 쿠키 : ${cookieOutput1}
+                                                        이달 쿠키 : ${cookieOutput2}
+                                                        펫 : ${petOutput}`;
+
+        // 이전에 선택한 인덱스 업데이트
+        prevIndexCookies1 = randomIndexCookies1;
+        prevIndexCookies2 = randomIndexCookies2;
+    }
+</script>
+
+</body>
+</html>
